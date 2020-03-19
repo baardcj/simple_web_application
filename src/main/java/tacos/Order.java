@@ -18,7 +18,6 @@ public class Order {
   private Long id;
   private Date placedAt;
 
-
   @NotBlank(message="Name is required")
   private String deliveryName;
 
@@ -49,7 +48,5 @@ public class Order {
   public void addDesign(Taco taco) {
 	  this.tacos.add(taco);
   }
- 
-
 
 }

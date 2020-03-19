@@ -21,16 +21,19 @@ public class JdbcIngredientRepository implements IngredientRepository {
     this.jdbc = jdbc;
   }
 
+  
   @Override
   public Iterable<Ingredient> findAll() {
     return jdbc.query("select id, name, type from Ingredient", this::mapRowToIngredient);
   }
 
+  
   @Override
   public Ingredient findOne(String id) {
     return jdbc.queryForObject("select id, name, type from Ingredient where id=?", this::mapRowToIngredient, id);
   }
 
+  
   private Ingredient mapRowToIngredient(ResultSet rs, int rowNum)
       throws SQLException {
     return new Ingredient(
@@ -38,6 +41,7 @@ public class JdbcIngredientRepository implements IngredientRepository {
         rs.getString("name"),
         Ingredient.Type.valueOf(rs.getString("type")));
   }
+  
   
   @Override
   public Ingredient save(Ingredient ingredient) {
