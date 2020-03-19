@@ -57,14 +57,6 @@ public class JdbcTacoRepository implements TacoRepository {
     KeyHolder keyHolder = new GeneratedKeyHolder();
     jdbc.update(psc, keyHolder);
 
-	try { 
-		return keyHolder.getKey().longValue();
-	}
-	catch (NullPointerException e) {
-		System.out.println(" - YES - nullpointerexception ... ");
-		e.printStackTrace(); 
-		System.exit(0); 
-	}
 	
 	return keyHolder.getKey().longValue();
   }
