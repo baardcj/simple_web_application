@@ -34,12 +34,14 @@ public class DesignTacoController {
   private final IngredientRepository ingredientRepo;
   private TacoRepository designRepo;
 
+  
   @Autowired
   public DesignTacoController(IngredientRepository ingredientRepo, TacoRepository designRepo) {
 	this.ingredientRepo = ingredientRepo;
 	this.designRepo = designRepo;
   }
 
+  
   @GetMapping
   public String showDesignForm(Model model) {
 	List<Ingredient> ingredients = new ArrayList<>();
@@ -54,7 +56,6 @@ public class DesignTacoController {
 	model.addAttribute("design", new Taco());
 	
 	return "design";
-	
   }
   
   
