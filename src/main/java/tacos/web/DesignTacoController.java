@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-
-
 import tacos.Taco;
 import tacos.Order;
 import tacos.Ingredient;
@@ -44,16 +42,16 @@ public class DesignTacoController {
   
   @GetMapping
   public String showDesignForm(Model model) {
+	  
 	List<Ingredient> ingredients = new ArrayList<>();
-	ingredientRepo.findAll().forEach(i -> ingredients.add(i));
-
+	ingredientRepo.findAll().forEach(i -> ingredients.add( i));
+	
 	Type[] types = Ingredient.Type.values();
 	
 	for (Type type : types) {
 	  model.addAttribute(type.toString().toLowerCase(),
 	  filterByType(ingredients, type));
 	}
-	//model.addAttribute("design", new Taco());
 	
 	return "design";
   }
@@ -65,8 +63,8 @@ public class DesignTacoController {
   }
 
   
-  @ModelAttribute(name = "taco")
-  public Taco taco() {
+  @ModelAttribute(name = "design")
+  public Taco design() {
     return new Taco();
   }
   
@@ -77,7 +75,6 @@ public class DesignTacoController {
       return "design";
     }
 
-    //log.info("Processing design: " + design);
     Taco saved = designRepo.save(design);
     order.addDesign(saved);
 
@@ -85,7 +82,6 @@ public class DesignTacoController {
   }
   
 
-  // changed <Ingredient> to ->  List<Ingredient> 
   private List<Ingredient> filterByType (List<Ingredient> ingredients, Type type) {
           return ingredients
           .stream()
@@ -93,3 +89,4 @@ public class DesignTacoController {
           .collect(Collectors.toList());
   }
 }
+
